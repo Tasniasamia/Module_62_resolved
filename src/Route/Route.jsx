@@ -9,6 +9,11 @@ import News_layout from "../Layout/News_layout/News_layout";
 import Catagory from "../Pages/Home/Catagory/Catagory";
 import News from "../Pages/Home/News/News";
 import About from "../Pages/Home/About/About";
+import Resister_login from "../Layout/Resister_login/Resister_login";
+import Resister from "../Resister/Resister";
+import Login from "../Login/Login";
+
+
 
 const router = createBrowserRouter([
   {
@@ -17,7 +22,8 @@ const router = createBrowserRouter([
     children:[
       {
         path:"/",
-        element:<Home></Home>,
+        element:<Catagory></Catagory>,
+        loader:()=>fetch('http://localhost:3000/news'),
        
       },{
         path:"/Catagory/:id",
@@ -27,10 +33,10 @@ const router = createBrowserRouter([
         path:"/About",
       element:<About></About>,
       }
-    ]
+    ],
   },
   {
-    path:"/New_layout",
+    path:"/",
     element:<News_layout></News_layout>,
     children:[
       {
@@ -38,7 +44,19 @@ const router = createBrowserRouter([
         element:<News></News>,
         loader:({params})=>fetch(`http://localhost:3000/news/${params.id}`)
       }
-    ]
+    ],
+  },{
+    path:"/",
+    element:<Resister_login></Resister_login>,
+    children:[
+      {
+        path:"/Resister",
+        element:<Resister></Resister>,
+      },{
+        path:"/Login",
+        element:<Login></Login>,
+      }
+    ],
   }
 ]);
 export default router;

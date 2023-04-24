@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from 'react-bootstrap/Button';
 import logo from '../../../assets/logo.png'
 import moment from 'moment';
@@ -6,7 +5,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Marquee from "react-fast-marquee";
+import { Link } from 'react-router-dom';
+import './Header.css'
+import { useContext } from 'react';
+import { authdata } from '../../../AuthProvider/AuthProvider';
 const Header = () => {
+  const receiveproperty=useContext(authdata);
     return (
         <div>
             <div className='text-center'>
@@ -29,15 +33,21 @@ const Header = () => {
       <Container>
         {/* <Navbar.Toggle aria-controls="responsive-navbar-nav" /> */}
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mx-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/About">About</Nav.Link>
-            <Nav.Link href="#Career">Career</Nav.Link>
+          <Nav className="mx-auto"id="navbarlink">
+          <Link to="/">Home</Link>
+          <Link to="/About">About</Link>
+          <Link to="/Career">Career</Link>
 
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">Profile</Nav.Link>
-            <Button variant="secondary">Login</Button>
+            {
+              receiveproperty.user &&  <Nav.Link href="#deets">Profile</Nav.Link>
+            }
+           
+            {
+              receiveproperty.user ?<><span className='me-2 my-auto'>{receiveproperty.user.email}</span><Button variant="secondary"onClick={receiveproperty.signout}>Logout</Button></>:<Button variant="secondary"><Link to="/Login">Login</Link></Button>
+            }
+            
           </Nav>
         </Navbar.Collapse>
       </Container>
