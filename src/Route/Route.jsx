@@ -1,10 +1,10 @@
 
 import {
+  Navigate,
   createBrowserRouter,
   
 } from "react-router-dom";
 import Main from "../Layout/Main";
-import Home from "../Pages/Home/Home/Home";
 import News_layout from "../Layout/News_layout/News_layout";
 import Catagory from "../Pages/Home/Catagory/Catagory";
 import News from "../Pages/Home/News/News";
@@ -17,30 +17,28 @@ import Login from "../Login/Login";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "catagory",
     element:<Main></Main>,
     children:[
-      {
-        path:"/",
-        element:<Catagory></Catagory>,
-        loader:()=>fetch('http://localhost:3000/news'),
+      // {
+      //   path:"/",
+      //   element:<Catagory></Catagory>,
+      //   loader:()=>fetch('http://localhost:3000/news'),
        
-      },{
-        path:"/Catagory/:id",
+      // },
+      {
+        path:":id",
         element:<Catagory></Catagory>,
         loader:({params})=>fetch(`http://localhost:3000/catagory/${params.id}`)
-      },{
-        path:"/About",
-      element:<About></About>,
       }
     ],
   },
   {
-    path:"/",
+    path:"New_layout",
     element:<News_layout></News_layout>,
     children:[
       {
-        path:"/New_layout/:id",
+        path:":id",
         element:<News></News>,
         loader:({params})=>fetch(`http://localhost:3000/news/${params.id}`)
       }
@@ -50,11 +48,18 @@ const router = createBrowserRouter([
     element:<Resister_login></Resister_login>,
     children:[
       {
+path:"/",
+element:<Navigate to="/catagory/0"></Navigate>
+      },
+      {
         path:"/Resister",
         element:<Resister></Resister>,
       },{
         path:"/Login",
         element:<Login></Login>,
+      },{
+        path:"/about",
+        element:<About></About>
       }
     ],
   }

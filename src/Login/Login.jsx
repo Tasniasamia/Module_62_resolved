@@ -17,6 +17,7 @@ function Login() {
             // Signed in 
             const user = userCredential.user;
             console.log(user);
+            receivedata.setUser(user);
             setSuccess("User has submited successfully");
             setError('');
           })

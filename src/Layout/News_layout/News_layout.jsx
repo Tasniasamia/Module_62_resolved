@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import Header from '../../Pages/Shared/Header/Header';
 import Footer from '../../Pages/Shared/Footer/Footer';
 import Right from '../../Pages/Shared/Right/Right';
@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Outlet } from 'react-router-dom';
 const News_layout = () => {
+  
     return (
         <div>
             <Header></Header>

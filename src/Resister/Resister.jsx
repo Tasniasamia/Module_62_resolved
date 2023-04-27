@@ -7,21 +7,34 @@ function Resister() {
     const [success,setSuccess]=useState(null);
     const [error,setError]=useState(null);
 
-    const receivedata=useContext(authdata);
-    function resister(event){
+    const {resister,verification,displayname}=useContext(authdata);
+    function Resister(event){
         event.preventDefault();
+        const name=event.target.name.value;
         const email=event.target.email.value;
         const password=event.target.password.value;
+        const photo=event.target.photo.value;
         console.log(email,password);
-        receivedata.resister(email,password)
+        resister(email,password)
         .then((userCredential) => {
             
             const user = userCredential.user;
             console.log(user);
             setSuccess("User has submited successfully");
             setError("");
-            receivedata.verification();
-           
+       verification(user)
+            .then(() => {
+              // Email verification sent!
+              // ...
+            });
+        displayname(name,photo)
+            .then(() => {
+              // Profile updated!
+              // ...
+            }).catch((error) => {
+              // An error occurred
+              // ...
+            });
 
            
           })
@@ -40,12 +53,21 @@ function Resister() {
     <div className='d-flex justify-content-center'>
     <div>
     <h1 className='text-center'>Resister</h1>
-    <form onSubmit={resister}>
+    <form onSubmit={Resister}>
+    <div className="mb-3">
+      <label htmlFor="exampleInputname1" className="form-label">User Name</label>
+      <input type="text" className="form-control"name="name" id="exampleInputName1" aria-describedby="nameHelp"required/>
+    </div>
     <div className="mb-3">
       <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
       <input type="email" className="form-control"name="email" id="exampleInputEmail1" aria-describedby="emailHelp"required/>
       <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
     </div>
+    <div className="mb-3">
+      <div>
+      <label htmlFor="exampleInputphotoEmail1" className="form-label">Photo Url</label></div>
+
+      <input type="text" id="photo" name="photo"  />      </div>
     <div className="mb-3">
       <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
       <input type="password" className="form-control"name="password" id="exampleInputPassword1"required/>
