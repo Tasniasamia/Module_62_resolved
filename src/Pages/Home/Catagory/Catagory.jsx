@@ -13,7 +13,7 @@ const Catagory = () => {
             {
                 loaddata.map(index=><Newsdata key={index._id} data={index}></Newsdata>)
             }
-            {/* This is catagory{loaddata.length} */}
+            This is catagory{loaddata.length}
           
         </div>
     );

@@ -6,7 +6,7 @@ import { authdata } from '../AuthProvider/AuthProvider';
 function Resister() {
     const [success,setSuccess]=useState(null);
     const [error,setError]=useState(null);
-
+const [accept,setAccept]=useState(false);
     const {resister,verification,displayname}=useContext(authdata);
     function Resister(event){
         event.preventDefault();
@@ -49,6 +49,11 @@ function Resister() {
           
 
     }
+    function handlecheck (event){
+      console.log(event.target.checked);
+      setAccept(event.target.checked);
+
+    }
   return (
     <div className='d-flex justify-content-center'>
     <div>
@@ -73,10 +78,10 @@ function Resister() {
       <input type="password" className="form-control"name="password" id="exampleInputPassword1"required/>
     </div>
     <div className="mb-3 form-check">
-      <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-      <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+      <input onClick={handlecheck} type="checkbox" className="form-check-input" id="exampleCheck1"name="checktag"/>
+      <label className="form-check-label" htmlFor="exampleCheck1">Accept <Link to="/Terms">Terms and Condition</Link> </label>
     </div>
-    <button type="submit" className="btn btn-primary">Submit</button>
+    <button type="submit" className="btn btn-primary"disabled={!accept}>Resister</button>
     <p className='text-danger'>{error}</p>
     <p className='text-success'>{success}</p>
     <p>Do you have a account? please <Link to="/Login">Login</Link>   </p>

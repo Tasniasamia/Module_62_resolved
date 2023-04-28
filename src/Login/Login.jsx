@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { authdata } from '../AuthProvider/AuthProvider';
 
 
@@ -7,6 +7,10 @@ function Login() {
     const receivedata=useContext(authdata);
     const [success,setSuccess]=useState(null);
     const [error,setError]=useState(null);
+    const location=useLocation();
+    let from=location.state?.from?.pathname || "/catagory/0"
+    console.log(location)
+    const navigate=useNavigate();
     function signin(event){
         event.preventDefault();
 
@@ -20,6 +24,7 @@ function Login() {
             receivedata.setUser(user);
             setSuccess("User has submited successfully");
             setError('');
+            navigate(from);
           })
           .catch((error) => {
             const errorCode = error.code;

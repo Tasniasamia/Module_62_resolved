@@ -12,6 +12,8 @@ import About from "../Pages/Home/About/About";
 import Resister_login from "../Layout/Resister_login/Resister_login";
 import Resister from "../Resister/Resister";
 import Login from "../Login/Login";
+import Terms from "../Terms/Terms";
+import Private_route from "../Private_route/Private_route";
 
 
 
@@ -35,7 +37,7 @@ const router = createBrowserRouter([
   },
   {
     path:"New_layout",
-    element:<News_layout></News_layout>,
+    element:<Private_route><News_layout></News_layout></Private_route>,
     children:[
       {
         path:":id",
@@ -54,12 +56,18 @@ element:<Navigate to="/catagory/0"></Navigate>
       {
         path:"/Resister",
         element:<Resister></Resister>,
+        loader:({params})=>{
+          console.log(params);
+          return params}
       },{
         path:"/Login",
         element:<Login></Login>,
       },{
         path:"/about",
         element:<About></About>
+      },{
+        path:"/Terms",
+        element:<Terms></Terms>,
       }
     ],
   }
