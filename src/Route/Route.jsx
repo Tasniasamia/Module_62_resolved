@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       {
         path:":id",
         element:<Catagory></Catagory>,
-        loader:({params})=>fetch(`http://localhost:3000/catagory/${params.id}`)
+        loader:({params})=>fetch(`https://myapp-tasniasamia.vercel.app/catagory/${params.id}`)
       }
     ],
   },
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       {
         path:":id",
         element:<News></News>,
-        loader:({params})=>fetch(`http://localhost:3000/news/${params.id}`)
+        loader:({params})=>fetch(`https://myapp-tasniasamia.vercel.app/news/${params.id}`)
       }
     ],
   },{

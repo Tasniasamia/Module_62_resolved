@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Left = () => {
     const[catagory,setCatagory]=useState([]);
     useEffect(()=>{
-        fetch('http://localhost:3000/catagory')
+        fetch('https://myapp-tasniasamia.vercel.app/catagory')
         .then(res=>res.json())
         .then(data=>setCatagory(data));
     },[])
